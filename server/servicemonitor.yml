@@ -1,0 +1,39 @@
+---
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+
+metadata:
+  name: kubestate-metrics
+
+spec:
+  endpoints:
+    - port: main
+      scheme: https
+      interval: 30s
+      scrapeTimeout: 30s
+      honorLabels: true
+
+      bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
+      tlsConfig:
+        insecureSkipVerify: true
+
+      relabelings:
+        - action: labeldrop
+          regex: (pod|service|endpoint|namespace)
+
+    - port: self
+      scheme: https
+      interval: 30s
+
+      bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
+      tlsConfig:
+        insecureSkipVerify: true
+
+  jobLabel: app.kubernetes.io/name
+
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: kubestate-metrics
+      app.kubernetes.io/component: server
+
+...

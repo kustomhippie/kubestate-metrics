@@ -1,0 +1,15 @@
+---
+apiVersion: v1
+kind: Service
+
+metadata:
+  name: kubestate-metrics
+
+spec:
+  ports:
+    - name: main
+      port: 8443
+    - name: self
+      port: 9443
+
+...

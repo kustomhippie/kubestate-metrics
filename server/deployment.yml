@@ -1,0 +1,93 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: kubestate-metrics
+
+spec:
+  replicas: 1
+
+  template:
+    spec:
+      serviceAccountName: kubestate-metrics
+
+      containers:
+        - name: server
+          image: kubestate-metrics
+          imagePullPolicy: IfNotPresent
+
+          securityContext:
+            runAsUser: 65534
+
+          args:
+            - --host=127.0.0.1
+            - --port=8081
+            - --telemetry-host=127.0.0.1
+            - --telemetry-port=8082
+
+          resources:
+            requests:
+              cpu: "0.1"
+              memory: "128Mi"
+            limits:
+              cpu: "0.1"
+              memory: "256Mi"
+
+        - name: main
+          image: kubestate-rbacproxy
+          imagePullPolicy: IfNotPresent
+
+          securityContext:
+            runAsGroup: 65532
+            runAsNonRoot: true
+            runAsUser: 65532
+
+          args:
+            - --logtostderr
+            - --secure-listen-address=:8443
+            - --tls-cipher-suites=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305
+            - --upstream=http://127.0.0.1:8081/
+
+          ports:
+            - name: main
+              containerPort: 8443
+              protocol: TCP
+
+          resources:
+            requests:
+              cpu: "20m"
+              memory: "20Mi"
+            limits:
+              cpu: "40m"
+              memory: "40Mi"
+
+        - name: self
+          image: kubestate-rbacproxy
+          imagePullPolicy: IfNotPresent
+
+          securityContext:
+            runAsGroup: 65532
+            runAsNonRoot: true
+            runAsUser: 65532
+
+          args:
+            - --logtostderr
+            - --secure-listen-address=:9443
+            - --tls-cipher-suites=TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305,TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305
+            - --upstream=http://127.0.0.1:8082/
+
+          ports:
+            - name: self
+              containerPort: 9443
+              protocol: TCP
+
+          resources:
+            requests:
+              cpu: "20m"
+              memory: "20Mi"
+            limits:
+              cpu: "40m"
+              memory: "40Mi"
+
+...
