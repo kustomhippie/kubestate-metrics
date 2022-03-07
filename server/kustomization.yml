@@ -19,7 +19,7 @@ commonLabels:
 images:
   - name: kubestate-metrics
     newName: k8s.gcr.io/kube-state-metrics/kube-state-metrics
-    newTag: "v2.0.0"
+    newTag: "v2.4.1"
   - name: kubestate-rbacproxy
     newName: quay.io/brancz/kube-rbac-proxy
     newTag: "v0.8.0"
