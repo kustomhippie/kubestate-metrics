@@ -4,8 +4,15 @@ kind: Service
 
 metadata:
   name: kubestate-metrics
+  labels:
+    app.kubernetes.io/name: kubestate-metrics
+    app.kubernetes.io/component: server
 
 spec:
+  selector:
+    app.kubernetes.io/name: kubestate-metrics
+    app.kubernetes.io/component: server
+
   ports:
     - name: main
       port: 8443

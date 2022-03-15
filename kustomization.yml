@@ -5,15 +5,4 @@ kind: Kustomization
 resources:
   - server/
 
-commonLabels:
-  app.kubernetes.io/name: kubestate-metrics
-
-images:
-  - name: kubestate-metrics
-    newName: k8s.gcr.io/kube-state-metrics/kube-state-metrics
-    newTag: "v2.4.2"
-  - name: kubestate-rbacproxy
-    newName: quay.io/brancz/kube-rbac-proxy
-    newTag: "v0.11.0"
-
 ...

@@ -4,11 +4,28 @@ kind: Deployment
 
 metadata:
   name: kubestate-metrics
+  labels:
+    app.kubernetes.io/name: kubestate-metrics
+    app.kubernetes.io/component: server
 
 spec:
   replicas: 1
+  revisionHistoryLimit: 3
+
+  strategy:
+    type: Recreate
+
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: kubestate-metrics
+      app.kubernetes.io/component: server
 
   template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: kubestate-metrics
+        app.kubernetes.io/component: server
+
     spec:
       serviceAccountName: kubestate-metrics
 

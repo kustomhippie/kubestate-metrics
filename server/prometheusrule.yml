@@ -5,6 +5,8 @@ kind: PrometheusRule
 metadata:
   name: kubestate-metrics
   labels:
+    app.kubernetes.io/name: kubestate-metrics
+    app.kubernetes.io/component: server
     prometheus: server
     role: rules
 
