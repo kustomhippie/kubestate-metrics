@@ -19,6 +19,6 @@ images:
     newTag: "v2.9.2"
   - name: kubestate-rbacproxy
     newName: quay.io/brancz/kube-rbac-proxy
-    newTag: "v0.14.1"
+    newTag: "v0.14.2"
 
 ...
