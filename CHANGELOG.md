@@ -1,5 +1,17 @@
 # Changelog
 
+## [2.2.0](https://github.com/kustomhippie/kubestate-metrics/compare/v2.1.1...v2.2.0) (2023-10-23)
+
+
+### Features
+
+* **deps:** update quay.io/brancz/kube-rbac-proxy docker tag to v0.15.0 ([b82e55c](https://github.com/kustomhippie/kubestate-metrics/commit/b82e55cec3baab07b6ffc9468f32228af33157b4))
+
+
+### Bugfixes
+
+* **deps:** update quay.io/brancz/kube-rbac-proxy docker tag to v0.14.4 ([b92d340](https://github.com/kustomhippie/kubestate-metrics/commit/b92d340d28610db226bc997318cdf957a3569741))
+
 ## [2.1.1](https://github.com/kustomhippie/kubestate-metrics/compare/v2.1.0...v2.1.1) (2023-09-18)
 
 
