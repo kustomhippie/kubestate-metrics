@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.4.0](https://github.com/kustomhippie/kubestate-metrics/compare/v2.3.0...v2.4.0) (2024-03-18)
+
+
+### Features
+
+* **deps:** update registry.k8s.io/kube-state-metrics/kube-state-metrics docker tag to v2.11.0 ([e4b8c6f](https://github.com/kustomhippie/kubestate-metrics/commit/e4b8c6f696145cee514ff36dd049960293824807))
+
 ## [2.3.0](https://github.com/kustomhippie/kubestate-metrics/compare/v2.2.1...v2.3.0) (2024-02-12)
 
 
